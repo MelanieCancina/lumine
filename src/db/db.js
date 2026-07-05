@@ -11,6 +11,10 @@
 import * as SQLite from "expo-sqlite";
 import { productos as productosSemilla } from "../datos/productos";
 
+// Subir este número cada vez que cambie el catálogo semilla: la tabla
+// productos se vuelve a sembrar sin tocar el carrito ni los favoritos.
+const VERSION_CATALOGO = 2;
+
 let dbPromesa = null;
 
 function obtenerDB() {
@@ -44,17 +48,21 @@ export async function inicializarBaseDatos() {
     );
   `);
 
-  // Sembrar productos sólo si la tabla está vacía.
-  const fila = await db.getFirstAsync("SELECT COUNT(*) AS total FROM productos");
-  if (!fila || fila.total === 0) {
-    for (const p of productosSemilla) {
-      await db.runAsync(
-        `INSERT INTO productos
-          (id, nombre, categoria, precio, precioAnterior, badge, destacado, envioGratis, descripcion)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [p.id, p.nombre, p.categoria, p.precio, p.precioAnterior, p.badge, p.destacado, p.envioGratis, p.descripcion]
-      );
-    }
+  // Sembrar (o re-sembrar) el catálogo cuando la versión guardada quedó vieja.
+  const fila = await db.getFirstAsync("PRAGMA user_version");
+  if (!fila || fila.user_version < VERSION_CATALOGO) {
+    await db.withTransactionAsync(async () => {
+      await db.execAsync("DELETE FROM productos");
+      for (const p of productosSemilla) {
+        await db.runAsync(
+          `INSERT INTO productos
+            (id, nombre, categoria, precio, precioAnterior, badge, destacado, envioGratis, descripcion)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [p.id, p.nombre, p.categoria, p.precio, p.precioAnterior, p.badge, p.destacado, p.envioGratis, p.descripcion]
+        );
+      }
+    });
+    await db.execAsync(`PRAGMA user_version = ${VERSION_CATALOGO}`);
   }
 }
 
