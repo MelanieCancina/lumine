@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   nombre: { fontSize: 22, fontWeight: "700", color: colors.textoPrimario, lineHeight: 28 },
   filaPrecio: { flexDirection: "row", alignItems: "baseline", gap: spacing.sm, marginTop: spacing.xs },
   precio: { fontSize: 24, fontWeight: "700", color: colors.textoPrimario },
-  precioAnterior: { fontSize: 14, color: colors.textoTenue, textDecorationLine: "line-through" },
+  precioAnterior: { fontSize: 14, color: colors.textoTenue, textDecorationLine: "line-through", paddingRight: 4 },
   cuotas: { fontSize: 13, color: colors.salvia, fontWeight: "700" },
   filaEnvio: { flexDirection: "row", alignItems: "center", gap: 6, marginTop: spacing.xs },
   envio: { fontSize: 13, color: colors.textoSecundario },

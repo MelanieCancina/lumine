@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
   nombre: { fontSize: 13, color: colors.textoPrimario, lineHeight: 17 },
   filaPrecio: { flexDirection: "row", alignItems: "baseline", gap: 6 },
   precio: { fontSize: 14, fontWeight: "700", color: colors.textoPrimario },
-  precioAnterior: { fontSize: 11, color: colors.textoTenue, textDecorationLine: "line-through" },
+  precioAnterior: { fontSize: 11, color: colors.textoTenue, textDecorationLine: "line-through", paddingRight: 4 },
   envio: { fontSize: 10, color: colors.salvia, fontWeight: "700" },
 });
