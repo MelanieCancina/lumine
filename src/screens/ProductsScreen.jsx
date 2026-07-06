@@ -55,8 +55,8 @@ export default function ProductsScreen({ navigation, route }) {
               onPress={() => setCategoriaActiva(f.id)}
               style={[styles.chip, activo && styles.chipActivo]}
             >
-              <Text allowFontScaling={false} style={[styles.chipTexto, activo && styles.chipTextoActivo]}>
-                {f.nombre + " "}
+              <Text allowFontScaling={false} numberOfLines={1} style={[styles.chipTexto, activo && styles.chipTextoActivo]}>
+                {f.nombre.replace(/ /g, " ") + " "}
               </Text>
             </Pressable>
           );
