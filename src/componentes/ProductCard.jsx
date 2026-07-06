@@ -34,9 +34,9 @@ export default function ProductCard({ producto, onPress, esFavorito, onToggleFav
           {producto.nombre}
         </Text>
         <View style={styles.filaPrecio}>
-          <Text style={styles.precio}>{formatearPrecio(producto.precio)}</Text>
+          <Text allowFontScaling={false} style={styles.precio}>{formatearPrecio(producto.precio)}</Text>
           {producto.precioAnterior ? (
-            <Text style={styles.precioAnterior}>{formatearPrecio(producto.precioAnterior)}</Text>
+            <Text allowFontScaling={false} style={styles.precioAnterior}>{formatearPrecio(producto.precioAnterior) + " "}</Text>
           ) : null}
         </View>
         {producto.envioGratis ? <Text style={styles.envio}>Envío gratis</Text> : null}

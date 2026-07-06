@@ -39,9 +39,14 @@ export default function ProductsScreen({ navigation, route }) {
         <SearchBar valor={busqueda} onChangeText={setBusqueda} autoFocus={route.params?.enfocarBusqueda} />
       </View>
 
-      {/* Chips en filas que se acomodan (flexWrap): todos visibles, ninguno
-          cortado por el borde de la pantalla. */}
-      <View style={styles.chips}>
+      {/* Chips en scroll horizontal: cada chip toma su ancho natural sin
+          límite, así el texto nunca se corta (estilo tienda de deco). */}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.chips}
+        style={styles.chipsWrap}
+      >
         {filtros.map((f) => {
           const activo = categoriaActiva === f.id;
           return (
@@ -50,11 +55,13 @@ export default function ProductsScreen({ navigation, route }) {
               onPress={() => setCategoriaActiva(f.id)}
               style={[styles.chip, activo && styles.chipActivo]}
             >
-              <Text style={[styles.chipTexto, activo && styles.chipTextoActivo]}>{f.nombre}</Text>
+              <Text allowFontScaling={false} style={[styles.chipTexto, activo && styles.chipTextoActivo]}>
+                {f.nombre + " "}
+              </Text>
             </Pressable>
           );
         })}
-      </View>
+      </ScrollView>
 
       {resultados.length === 0 ? (
         <EstadoVacio icono="search-outline" titulo="Sin resultados" subtitulo="Probá con otra categoría o búsqueda." />
@@ -71,7 +78,8 @@ const styles = StyleSheet.create({
   pantalla: { flex: 1, backgroundColor: colors.fondo },
   titulo: { fontSize: 26, fontWeight: "700", color: colors.textoPrimario, paddingHorizontal: spacing.xl, paddingTop: spacing.lg, paddingBottom: spacing.sm },
   buscadorWrap: { paddingHorizontal: spacing.xl, marginBottom: spacing.md },
-  chips: { flexDirection: "row", flexWrap: "wrap", paddingHorizontal: spacing.xl, gap: spacing.sm, paddingBottom: spacing.md },
+  chipsWrap: { flexGrow: 0 },
+  chips: { flexDirection: "row", paddingHorizontal: spacing.xl, gap: spacing.sm, paddingBottom: spacing.md },
   chip: { paddingHorizontal: spacing.lg, paddingVertical: 8, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.bordeFuerte, backgroundColor: colors.superficie },
   chipActivo: { backgroundColor: colors.oscuro, borderColor: colors.oscuro },
   chipTexto: { fontSize: 13, color: colors.textoSecundario, paddingHorizontal: 2 },

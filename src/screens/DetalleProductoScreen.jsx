@@ -69,9 +69,9 @@ export default function DetalleProductoScreen({ route, navigation }) {
           <Text style={styles.nombre}>{producto.nombre}</Text>
 
           <View style={styles.filaPrecio}>
-            <Text style={styles.precio}>{formatearPrecio(producto.precio)}</Text>
+            <Text allowFontScaling={false} style={styles.precio}>{formatearPrecio(producto.precio)}</Text>
             {producto.precioAnterior ? (
-              <Text style={styles.precioAnterior}>{formatearPrecio(producto.precioAnterior)}</Text>
+              <Text allowFontScaling={false} style={styles.precioAnterior}>{formatearPrecio(producto.precioAnterior) + " "}</Text>
             ) : null}
           </View>
           <Text style={styles.cuotas}>{etiquetaCuotas(producto.precio)} sin interés</Text>
