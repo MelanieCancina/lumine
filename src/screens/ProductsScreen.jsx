@@ -55,7 +55,7 @@ export default function ProductsScreen({ navigation, route }) {
               onPress={() => setCategoriaActiva(f.id)}
               style={[styles.chip, activo && styles.chipActivo]}
             >
-              <Text allowFontScaling={false} numberOfLines={1} style={[styles.chipTexto, activo && styles.chipTextoActivo]}>
+              <Text allowFontScaling={false} style={[styles.chipTexto, activo && styles.chipTextoActivo]}>
                 {f.nombre.replace(/ /g, " ") + " "}
               </Text>
             </Pressable>
@@ -84,6 +84,8 @@ const styles = StyleSheet.create({
   chips: { flexDirection: "row", alignItems: "center", paddingHorizontal: spacing.xl, gap: spacing.sm },
   chip: { paddingHorizontal: spacing.lg, paddingVertical: 8, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.bordeFuerte, backgroundColor: colors.superficie },
   chipActivo: { backgroundColor: colors.oscuro, borderColor: colors.oscuro },
-  chipTexto: { fontSize: 13, color: colors.textoSecundario, paddingHorizontal: 2 },
+  // El padding derecho actúa de colchón: si el texto se dibuja más ancho de lo
+  // medido (pantallas con zoom/escala), desborda sobre el padding y no se corta.
+  chipTexto: { fontSize: 13, color: colors.textoSecundario, paddingLeft: 2, paddingRight: 12 },
   chipTextoActivo: { color: colors.blanco, fontWeight: "600" },
 });
