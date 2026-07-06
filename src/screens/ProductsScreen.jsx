@@ -78,8 +78,10 @@ const styles = StyleSheet.create({
   pantalla: { flex: 1, backgroundColor: colors.fondo },
   titulo: { fontSize: 26, fontWeight: "700", color: colors.textoPrimario, paddingHorizontal: spacing.xl, paddingTop: spacing.lg, paddingBottom: spacing.sm },
   buscadorWrap: { paddingHorizontal: spacing.xl, marginBottom: spacing.md },
-  chipsWrap: { flexGrow: 0 },
-  chips: { flexDirection: "row", paddingHorizontal: spacing.xl, gap: spacing.sm, paddingBottom: spacing.md },
+  // Altura fija: los ScrollView horizontales no siempre miden bien la altura
+  // de sus hijos y aplastan los chips.
+  chipsWrap: { flexGrow: 0, flexShrink: 0, height: 56 },
+  chips: { flexDirection: "row", alignItems: "center", paddingHorizontal: spacing.xl, gap: spacing.sm },
   chip: { paddingHorizontal: spacing.lg, paddingVertical: 8, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.bordeFuerte, backgroundColor: colors.superficie },
   chipActivo: { backgroundColor: colors.oscuro, borderColor: colors.oscuro },
   chipTexto: { fontSize: 13, color: colors.textoSecundario, paddingHorizontal: 2 },
