@@ -74,8 +74,6 @@ const styles = StyleSheet.create({
   chips: { flexDirection: "row", flexWrap: "wrap", paddingHorizontal: spacing.xl, gap: spacing.sm, paddingBottom: spacing.md },
   chip: { paddingHorizontal: spacing.lg, paddingVertical: 8, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.bordeFuerte, backgroundColor: colors.superficie },
   chipActivo: { backgroundColor: colors.oscuro, borderColor: colors.oscuro },
-  // El padding generoso evita que Android recorte el último carácter cuando
-  // la fuente del sistema mide distinto de lo calculado.
-  chipTexto: { fontSize: 13, color: colors.textoSecundario, paddingHorizontal: 8, textAlign: "center" },
+  chipTexto: { fontSize: 13, color: colors.textoSecundario, paddingHorizontal: 2 },
   chipTextoActivo: { color: colors.blanco, fontWeight: "600" },
 });

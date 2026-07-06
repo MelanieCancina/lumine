@@ -2,9 +2,18 @@
 // estado y monta la navegación.
 
 import { useEffect, useRef } from "react";
+import { Text, TextInput } from "react-native";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+
+// La app usa sus propios tamaños de letra (no el ajuste de fuente del sistema).
+// En Android, con la fuente del sistema agrandada, el texto se dibuja más ancho
+// de lo medido y se recorta el último carácter (chips, precios, etc.).
+if (Text.defaultProps == null) Text.defaultProps = {};
+Text.defaultProps.allowFontScaling = false;
+if (TextInput.defaultProps == null) TextInput.defaultProps = {};
+TextInput.defaultProps.allowFontScaling = false;
 
 import { store } from "./src/store";
 import AppNavigator from "./src/navigation/AppNavigator";
